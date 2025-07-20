@@ -100,7 +100,6 @@ STS_SMS_SERIES_CONTROL_TABLE = {
     "Acceleration_Multiplier ": (86, 1),  # Acceleration multiplier in effect when acceleration is 0
 }
 
-# http://doc.feetech.cn/#/prodinfodownload?srcType=FT-SCSCL-emanual-cbcc8ab2e3384282a01d4bf3
 SCS_SERIES_CONTROL_TABLE = {
     # EPROM
     "Firmware_Major_Version": FIRMWARE_MAJOR_VERSION,  # read-only
@@ -151,6 +150,45 @@ SCS_SERIES_CONTROL_TABLE = {
     "Acceleration_2": (83, 1),  # don't know what that is
 }
 
+
+ST3215_CONTROL_TABLE = {
+    # EPROM (Read-Only)
+    "Model_Number": (3, 2),  # STS_MODEL_L (3), STS_MODEL_H (4)
+
+    # EPROM (Read/Write)
+    "ID": (5, 1),                            # STS_ID
+    "Baud_Rate": (6, 1),                     # STS_BAUD_RATE
+    "Min_Position_Limit": (9, 2),            # STS_MIN_ANGLE_LIMIT_L + H
+    "Max_Position_Limit": (11, 2),           # STS_MAX_ANGLE_LIMIT_L + H
+    "CW_Dead_Zone": (26, 1),                 # STS_CW_DEAD
+    "CCW_Dead_Zone": (27, 1),                # STS_CCW_DEAD
+    "Homing_Offset": (31, 2),                # STS_OFS_L + H
+    "Operating_Mode": (33, 1),               # STS_MODE
+    "Return_Delay_Time": (7, 1),
+    "Maximum_Acceleration": (85, 1),
+    "P_Coefficient": (21, 1),
+    "D_Coefficient": (22, 1),
+    "I_Coefficient": (23, 1),
+
+    # SRAM (Read/Write)
+    "Torque_Enable": (40, 1),                # STS_TORQUE_ENABLE
+    "Acceleration": (41, 1),                 # STS_ACC
+    "Goal_Position": (42, 2),                # STS_GOAL_POSITION_L + H
+    "Goal_Time": (44, 2),                    # STS_GOAL_TIME_L + H
+    "Goal_Speed": (46, 2),                   # STS_GOAL_SPEED_L + H
+    "Lock": (55, 1),                         # STS_LOCK
+
+    # SRAM (Read-Only)
+    "Present_Position": (56, 2),             # STS_PRESENT_POSITION_L + H
+    "Present_Speed": (58, 2),                # STS_PRESENT_SPEED_L + H
+    "Present_Load": (60, 2),                 # STS_PRESENT_LOAD_L + H
+    "Present_Voltage": (62, 1),              # STS_PRESENT_VOLTAGE
+    "Present_Temperature": (63, 1),          # STS_PRESENT_TEMPERATURE
+    "Moving": (66, 1),                       # STS_MOVING
+    "Present_Current": (69, 2),              # STS_PRESENT_CURRENT_L + H
+}
+
+
 STS_SMS_SERIES_BAUDRATE_TABLE = {
     1_000_000: 0,
     500_000: 1,
@@ -181,6 +219,7 @@ MODEL_CONTROL_TABLE = {
     "sts3250": STS_SMS_SERIES_CONTROL_TABLE,
     "scs0009": SCS_SERIES_CONTROL_TABLE,
     "sm8512bl": STS_SMS_SERIES_CONTROL_TABLE,
+    "st3215" : ST3215_CONTROL_TABLE,
 }
 
 MODEL_RESOLUTION = {
@@ -191,6 +230,8 @@ MODEL_RESOLUTION = {
     "sts3250": 4096,
     "sm8512bl": 4096,
     "scs0009": 1024,
+    "st3215": 4096
+
 }
 
 MODEL_BAUDRATE_TABLE = {
@@ -201,6 +242,8 @@ MODEL_BAUDRATE_TABLE = {
     "sts3215": STS_SMS_SERIES_BAUDRATE_TABLE,
     "sts3250": STS_SMS_SERIES_BAUDRATE_TABLE,
     "scs0009": SCS_SERIES_BAUDRATE_TABLE,
+    "st3215": STS_SMS_SERIES_BAUDRATE_TABLE,
+
 }
 
 # Sign-Magnitude encoding bits
@@ -218,6 +261,7 @@ MODEL_ENCODING_TABLE = {
     "sts3250": STS_SMS_SERIES_ENCODINGS_TABLE,
     "sm8512bl": STS_SMS_SERIES_ENCODINGS_TABLE,
     "scs0009": {},
+    "st3215" : STS_SMS_SERIES_ENCODINGS_TABLE,
 }
 
 SCAN_BAUDRATES = [
@@ -239,6 +283,7 @@ MODEL_NUMBER_TABLE = {
     "sts3250": 2825,
     "sm8512bl": 11272,
     "scs0009": 1284,
+    "st3215": 777,
 }
 
 MODEL_PROTOCOL = {
@@ -249,4 +294,5 @@ MODEL_PROTOCOL = {
     "sts3250": 0,
     "sm8512bl": 0,
     "scs0009": 1,
+    "st3215": 0,
 }
